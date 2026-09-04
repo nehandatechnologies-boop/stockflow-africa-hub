@@ -862,6 +862,25 @@ export type Database = {
         Returns: string
       }
       platform_stats: { Args: never; Returns: Json }
+      post_stock_transaction: {
+        Args: {
+          _department?: string
+          _destination_store?: string
+          _item: string
+          _org: string
+          _quantity: number
+          _reason?: string
+          _related?: string
+          _store: string
+          _type: Database["public"]["Enums"]["stock_txn_type"]
+          _unit_cost?: number
+        }
+        Returns: string
+      }
+      reverse_stock_transaction: {
+        Args: { _reason: string; _transaction: string }
+        Returns: string
+      }
     }
     Enums: {
       app_role:
