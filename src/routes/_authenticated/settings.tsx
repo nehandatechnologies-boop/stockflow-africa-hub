@@ -22,7 +22,7 @@ function SettingsPage() {
     { label: "Full name", value: profile?.full_name ?? "—" },
     { label: "Email", value: profile?.email ?? "—" },
     { label: "Organization", value: organization?.name ?? "—" },
-    { label: "Organization code", value: organization?.code ?? "—" },
+    { label: "Organization code", value: organization?.organization_code ?? "—" },
     { label: "Currency", value: organization?.currency ?? "—" },
     { label: "Roles", value: roles.join(", ") || "No role assigned" },
   ];
