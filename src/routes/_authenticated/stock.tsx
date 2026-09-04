@@ -75,8 +75,10 @@ function StockPage() {
     return all
       .filter((r) => storeFilter === "all" || r.store_id === storeFilter)
       .map((r) => {
-        const item = r.items as Record<string, unknown> | null;
-        const store = r.stores as Record<string, unknown> | null;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const item = r.items as any;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const store = r.stores as any;
         const qty = Number(r.quantity ?? 0);
         const reorder = Number(item?.reorder_level ?? 0);
         const minimum = Number(item?.minimum_stock_level ?? 0);
@@ -84,7 +86,7 @@ function StockPage() {
           ...r,
           item_name: String(item?.name ?? "Unknown item"),
           item_code: String(item?.item_code ?? "—"),
-          unit: String((item?.units_of_measure as Record<string, unknown> | null)?.abbreviation ?? ""),
+          unit: String(item?.units_of_measure?.abbreviation ?? ""),
           store_name: String(store?.name ?? "—"),
           level: qty <= 0 ? "out of stock" : qty <= minimum ? "critical" : qty <= reorder ? "reorder" : "healthy",
         };
