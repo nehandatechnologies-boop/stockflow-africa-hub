@@ -16,6 +16,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as AuthenticatedCategoriesRouteImport } from './routes/_authenticated/categories'
 import { Route as AuthenticatedDepartmentsRouteImport } from './routes/_authenticated/departments'
 import { Route as AuthenticatedInventoryRouteImport } from './routes/_authenticated/inventory'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
 import { Route as AuthenticatedStoresRouteImport } from './routes/_authenticated/stores'
 import { Route as AuthenticatedSuppliersRouteImport } from './routes/_authenticated/suppliers'
@@ -56,6 +57,11 @@ const AuthenticatedInventoryRoute = AuthenticatedInventoryRouteImport.update({
   path: '/inventory',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedStockRoute = AuthenticatedStockRouteImport.update({
   id: '/stock',
   path: '/stock',
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/categories': typeof AuthenticatedCategoriesRoute
   '/departments': typeof AuthenticatedDepartmentsRoute
   '/inventory': typeof AuthenticatedInventoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/stock': typeof AuthenticatedStockRoute
   '/stores': typeof AuthenticatedStoresRoute
   '/suppliers': typeof AuthenticatedSuppliersRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/categories': typeof AuthenticatedCategoriesRoute
   '/departments': typeof AuthenticatedDepartmentsRoute
   '/inventory': typeof AuthenticatedInventoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/stock': typeof AuthenticatedStockRoute
   '/stores': typeof AuthenticatedStoresRoute
   '/suppliers': typeof AuthenticatedSuppliersRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/_authenticated/categories': typeof AuthenticatedCategoriesRoute
   '/_authenticated/departments': typeof AuthenticatedDepartmentsRoute
   '/_authenticated/inventory': typeof AuthenticatedInventoryRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/stock': typeof AuthenticatedStockRoute
   '/_authenticated/stores': typeof AuthenticatedStoresRoute
   '/_authenticated/suppliers': typeof AuthenticatedSuppliersRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/categories'
     | '/departments'
     | '/inventory'
+    | '/settings'
     | '/stock'
     | '/stores'
     | '/suppliers'
@@ -136,6 +146,7 @@ export interface FileRouteTypes {
     | '/categories'
     | '/departments'
     | '/inventory'
+    | '/settings'
     | '/stock'
     | '/stores'
     | '/suppliers'
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
     | '/_authenticated/categories'
     | '/_authenticated/departments'
     | '/_authenticated/inventory'
+    | '/_authenticated/settings'
     | '/_authenticated/stock'
     | '/_authenticated/stores'
     | '/_authenticated/suppliers'
@@ -213,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedInventoryRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/stock': {
       id: '/_authenticated/stock'
       path: '/stock'
@@ -248,6 +267,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCategoriesRoute: typeof AuthenticatedCategoriesRoute
   AuthenticatedDepartmentsRoute: typeof AuthenticatedDepartmentsRoute
   AuthenticatedInventoryRoute: typeof AuthenticatedInventoryRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedStockRoute: typeof AuthenticatedStockRoute
   AuthenticatedStoresRoute: typeof AuthenticatedStoresRoute
   AuthenticatedSuppliersRoute: typeof AuthenticatedSuppliersRoute
@@ -258,6 +278,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCategoriesRoute: AuthenticatedCategoriesRoute,
   AuthenticatedDepartmentsRoute: AuthenticatedDepartmentsRoute,
   AuthenticatedInventoryRoute: AuthenticatedInventoryRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedStockRoute: AuthenticatedStockRoute,
   AuthenticatedStoresRoute: AuthenticatedStoresRoute,
   AuthenticatedSuppliersRoute: AuthenticatedSuppliersRoute,

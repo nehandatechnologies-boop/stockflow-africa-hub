@@ -19,19 +19,19 @@ export interface Column<T> {
 interface DataTableProps<T> {
   columns: Column<T>[];
   rows: T[];
-  loading?: boolean;
-  error?: string | null;
-  searchPlaceholder?: string;
+  loading?: boolean | undefined;
+  error?: string | null | undefined;
+  searchPlaceholder?: string | undefined;
   search: string;
   onSearchChange: (value: string) => void;
-  filters?: ReactNode;
-  emptyTitle?: string;
-  emptyDescription?: string;
-  emptyAction?: ReactNode;
-  rowActions?: (row: T) => ReactNode;
-  pageSize?: number;
+  filters?: ReactNode | undefined;
+  emptyTitle?: string | undefined;
+  emptyDescription?: string | undefined;
+  emptyAction?: ReactNode | undefined;
+  rowActions?: ((row: T) => ReactNode) | undefined;
+  pageSize?: number | undefined;
   getRowKey: (row: T) => string;
-  onRetry?: () => void;
+  onRetry?: (() => void) | undefined;
 }
 
 export function DataTable<T extends Record<string, unknown>>({

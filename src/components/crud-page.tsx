@@ -51,7 +51,8 @@ export interface FieldDef {
   full?: boolean;
 }
 
-type Row = Record<string, unknown>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Row = any;
 
 interface CrudPageProps {
   title: string;
@@ -344,7 +345,7 @@ export function CrudPage({
                     </div>
                   ) : field.type === "select" ? (
                     <Select
-                      value={value ? String(value) : undefined}
+                      {...(value ? { value: String(value) } : {})}
                       disabled={disabled}
                       onValueChange={(v) => setForm((f) => ({ ...f, [field.name]: v }))}
                     >
