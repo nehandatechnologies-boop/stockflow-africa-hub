@@ -31,7 +31,8 @@ export const Route = createFileRoute("/_authenticated/stock")({
   component: StockPage,
 });
 
-type BalanceRow = Record<string, unknown>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type BalanceRow = any;
 
 function StockPage() {
   const { organization } = useAuth();
