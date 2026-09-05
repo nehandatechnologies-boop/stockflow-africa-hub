@@ -76,7 +76,7 @@ const NAV_GROUPS: { heading: string; items: NavItem[] }[] = [
     heading: "Platform",
     items: [
       { to: "/platform", label: "Platform overview", icon: LayoutDashboard, supremeOnly: true },
-      { to: "/platform/organizations", label: "Organizations", icon: Building2, supremeOnly: true },
+      { to: "/organizations", label: "Organizations", icon: Building2, supremeOnly: true },
     ],
   },
 ];
