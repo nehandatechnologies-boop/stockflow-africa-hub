@@ -26,7 +26,7 @@ function CategoriesPage() {
       entityLabel="Category"
       tableName="categories"
       searchKeys={["name", "code", "description"]}
-      canManage={can("inventory.manage")}
+      canManage={can("inventory.create")}
       emptyDescription="Categories such as Food, Cleaning, Stationery or Fuel keep your item list navigable."
       columns={[
         { key: "code", header: "Code", sortable: true, className: "w-32" },

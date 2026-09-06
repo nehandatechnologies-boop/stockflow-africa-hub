@@ -25,7 +25,7 @@ function UnitsPage() {
       entityLabel="Unit"
       tableName="units_of_measure"
       searchKeys={["name", "abbreviation"]}
-      canManage={can("inventory.manage")}
+      canManage={can("inventory.create")}
       emptyDescription="Add units such as Kilogram (kg), Litre (L), Box or Crate."
       columns={[
         { key: "abbreviation", header: "Symbol", sortable: true, className: "w-32" },

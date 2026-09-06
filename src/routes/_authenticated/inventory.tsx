@@ -28,7 +28,7 @@ function ItemsPage() {
       entityLabel="Item"
       tableName="items"
       searchKeys={["name", "item_code", "sku", "barcode", "description"]}
-      canManage={can("inventory.manage")}
+      canManage={can("inventory.create")}
       emptyDescription="Add the goods you stock — provisions, consumables, fuel, equipment and spares."
       columns={[
         { key: "item_code", header: "Code", sortable: true, className: "w-32" },
