@@ -25,7 +25,7 @@ function SuppliersPage() {
       entityLabel="Supplier"
       tableName="suppliers"
       searchKeys={["name", "supplier_code", "contact_person", "email", "phone"]}
-      canManage={can("suppliers.manage")}
+      canManage={can("inventory.create")}
       emptyDescription="Add the vendors you buy provisions, fuel, cleaning and consumables from."
       columns={[
         { key: "supplier_code", header: "Code", sortable: true, className: "w-32" },
