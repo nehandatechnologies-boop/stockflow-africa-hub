@@ -14,6 +14,205 @@ export type Database = {
   }
   public: {
     Tables: {
+      asset_events: {
+        Row: {
+          asset_id: string
+          created_at: string
+          event_type: string
+          id: string
+          notes: string | null
+          organization_id: string
+          performed_by: string | null
+        }
+        Insert: {
+          asset_id: string
+          created_at?: string
+          event_type: string
+          id?: string
+          notes?: string | null
+          organization_id: string
+          performed_by?: string | null
+        }
+        Update: {
+          asset_id?: string
+          created_at?: string
+          event_type?: string
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          performed_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asset_events_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "assets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "asset_events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "asset_events_performed_by_fkey"
+            columns: ["performed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assets: {
+        Row: {
+          asset_number: string | null
+          assigned_to: string | null
+          category_id: string | null
+          condition: string | null
+          created_at: string
+          department_id: string | null
+          id: string
+          location: string | null
+          name: string
+          notes: string | null
+          organization_id: string
+          purchase_cost: number
+          purchase_date: string | null
+          serial_number: string | null
+          status: Database["public"]["Enums"]["asset_status"]
+          supplier_id: string | null
+          updated_at: string
+          warranty_expiry: string | null
+        }
+        Insert: {
+          asset_number?: string | null
+          assigned_to?: string | null
+          category_id?: string | null
+          condition?: string | null
+          created_at?: string
+          department_id?: string | null
+          id?: string
+          location?: string | null
+          name: string
+          notes?: string | null
+          organization_id: string
+          purchase_cost?: number
+          purchase_date?: string | null
+          serial_number?: string | null
+          status?: Database["public"]["Enums"]["asset_status"]
+          supplier_id?: string | null
+          updated_at?: string
+          warranty_expiry?: string | null
+        }
+        Update: {
+          asset_number?: string | null
+          assigned_to?: string | null
+          category_id?: string | null
+          condition?: string | null
+          created_at?: string
+          department_id?: string | null
+          id?: string
+          location?: string | null
+          name?: string
+          notes?: string | null
+          organization_id?: string
+          purchase_cost?: number
+          purchase_date?: string | null
+          serial_number?: string | null
+          status?: Database["public"]["Enums"]["asset_status"]
+          supplier_id?: string | null
+          updated_at?: string
+          warranty_expiry?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assets_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assets_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assets_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assets_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assets_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      attachments: {
+        Row: {
+          created_at: string
+          entity_id: string
+          entity_type: string
+          file_name: string
+          file_path: string
+          id: string
+          organization_id: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          entity_id: string
+          entity_type: string
+          file_name: string
+          file_path: string
+          id?: string
+          organization_id: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          entity_id?: string
+          entity_type?: string
+          file_name?: string
+          file_path?: string
+          id?: string
+          organization_id?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attachments_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attachments_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_logs: {
         Row: {
           action: string
@@ -163,6 +362,266 @@ export type Database = {
           },
         ]
       }
+      fuel_coupons: {
+        Row: {
+          authorized_by: string | null
+          coupon_number: string | null
+          created_at: string
+          department_id: string | null
+          driver_name: string | null
+          fuel_station: string | null
+          fuel_type: string
+          id: string
+          issue_date: string | null
+          issued_by: string | null
+          litres: number
+          notes: string | null
+          odometer_reading: number | null
+          organization_id: string
+          redemption_date: string | null
+          status: Database["public"]["Enums"]["coupon_status"]
+          updated_at: string
+          value: number
+          vehicle_id: string | null
+        }
+        Insert: {
+          authorized_by?: string | null
+          coupon_number?: string | null
+          created_at?: string
+          department_id?: string | null
+          driver_name?: string | null
+          fuel_station?: string | null
+          fuel_type?: string
+          id?: string
+          issue_date?: string | null
+          issued_by?: string | null
+          litres?: number
+          notes?: string | null
+          odometer_reading?: number | null
+          organization_id: string
+          redemption_date?: string | null
+          status?: Database["public"]["Enums"]["coupon_status"]
+          updated_at?: string
+          value?: number
+          vehicle_id?: string | null
+        }
+        Update: {
+          authorized_by?: string | null
+          coupon_number?: string | null
+          created_at?: string
+          department_id?: string | null
+          driver_name?: string | null
+          fuel_station?: string | null
+          fuel_type?: string
+          id?: string
+          issue_date?: string | null
+          issued_by?: string | null
+          litres?: number
+          notes?: string | null
+          odometer_reading?: number | null
+          organization_id?: string
+          redemption_date?: string | null
+          status?: Database["public"]["Enums"]["coupon_status"]
+          updated_at?: string
+          value?: number
+          vehicle_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fuel_coupons_authorized_by_fkey"
+            columns: ["authorized_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fuel_coupons_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fuel_coupons_issued_by_fkey"
+            columns: ["issued_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fuel_coupons_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fuel_coupons_vehicle_id_fkey"
+            columns: ["vehicle_id"]
+            isOneToOne: false
+            referencedRelation: "vehicles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      goods_received_notes: {
+        Row: {
+          checked_by: string | null
+          created_at: string
+          grn_number: string | null
+          id: string
+          notes: string | null
+          organization_id: string
+          purchase_order_id: string | null
+          received_by: string | null
+          received_date: string
+          status: Database["public"]["Enums"]["doc_status"]
+          store_id: string
+          supplier_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          checked_by?: string | null
+          created_at?: string
+          grn_number?: string | null
+          id?: string
+          notes?: string | null
+          organization_id: string
+          purchase_order_id?: string | null
+          received_by?: string | null
+          received_date?: string
+          status?: Database["public"]["Enums"]["doc_status"]
+          store_id: string
+          supplier_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          checked_by?: string | null
+          created_at?: string
+          grn_number?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          purchase_order_id?: string | null
+          received_by?: string | null
+          received_date?: string
+          status?: Database["public"]["Enums"]["doc_status"]
+          store_id?: string
+          supplier_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "goods_received_notes_checked_by_fkey"
+            columns: ["checked_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goods_received_notes_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goods_received_notes_purchase_order_id_fkey"
+            columns: ["purchase_order_id"]
+            isOneToOne: false
+            referencedRelation: "purchase_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goods_received_notes_received_by_fkey"
+            columns: ["received_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goods_received_notes_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goods_received_notes_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      grn_items: {
+        Row: {
+          batch_number: string | null
+          condition: string | null
+          created_at: string
+          expiry_date: string | null
+          grn_id: string
+          id: string
+          item_id: string
+          ordered_quantity: number
+          organization_id: string
+          received_quantity: number
+          rejected_quantity: number
+          unit_cost: number
+        }
+        Insert: {
+          batch_number?: string | null
+          condition?: string | null
+          created_at?: string
+          expiry_date?: string | null
+          grn_id: string
+          id?: string
+          item_id: string
+          ordered_quantity?: number
+          organization_id: string
+          received_quantity: number
+          rejected_quantity?: number
+          unit_cost?: number
+        }
+        Update: {
+          batch_number?: string | null
+          condition?: string | null
+          created_at?: string
+          expiry_date?: string | null
+          grn_id?: string
+          id?: string
+          item_id?: string
+          ordered_quantity?: number
+          organization_id?: string
+          received_quantity?: number
+          rejected_quantity?: number
+          unit_cost?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grn_items_grn_id_fkey"
+            columns: ["grn_id"]
+            isOneToOne: false
+            referencedRelation: "goods_received_notes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "grn_items_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "grn_items_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       items: {
         Row: {
           active: boolean
@@ -176,7 +635,9 @@ export type Database = {
           maximum_stock_level: number | null
           minimum_stock_level: number
           name: string
+          notes: string | null
           organization_id: string
+          preferred_supplier_id: string | null
           reorder_level: number
           sku: string | null
           track_batch: boolean
@@ -197,7 +658,9 @@ export type Database = {
           maximum_stock_level?: number | null
           minimum_stock_level?: number
           name: string
+          notes?: string | null
           organization_id: string
+          preferred_supplier_id?: string | null
           reorder_level?: number
           sku?: string | null
           track_batch?: boolean
@@ -218,7 +681,9 @@ export type Database = {
           maximum_stock_level?: number | null
           minimum_stock_level?: number
           name?: string
+          notes?: string | null
           organization_id?: string
+          preferred_supplier_id?: string | null
           reorder_level?: number
           sku?: string | null
           track_batch?: boolean
@@ -243,6 +708,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "items_preferred_supplier_id_fkey"
+            columns: ["preferred_supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "items_unit_of_measure_id_fkey"
             columns: ["unit_of_measure_id"]
             isOneToOne: false
@@ -251,60 +723,126 @@ export type Database = {
           },
         ]
       }
+      notifications: {
+        Row: {
+          body: string | null
+          category: string
+          created_at: string
+          entity_id: string | null
+          entity_type: string | null
+          id: string
+          organization_id: string
+          read_at: string | null
+          title: string
+          user_id: string | null
+        }
+        Insert: {
+          body?: string | null
+          category?: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+          organization_id: string
+          read_at?: string | null
+          title: string
+          user_id?: string | null
+        }
+        Update: {
+          body?: string | null
+          category?: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+          organization_id?: string
+          read_at?: string | null
+          title?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organizations: {
         Row: {
           address: string | null
+          allow_negative_stock: boolean
           city: string | null
           country: string
           created_at: string
           currency: string
           description: string | null
           email: string | null
+          fiscal_year_start_month: number
           id: string
           is_demo: boolean
           logo_url: string | null
           name: string
           organization_code: string
           phone: string | null
+          plan: string
           status: Database["public"]["Enums"]["entity_status"]
           timezone: string
           updated_at: string
+          valuation_method: string
         }
         Insert: {
           address?: string | null
+          allow_negative_stock?: boolean
           city?: string | null
           country?: string
           created_at?: string
           currency?: string
           description?: string | null
           email?: string | null
+          fiscal_year_start_month?: number
           id?: string
           is_demo?: boolean
           logo_url?: string | null
           name: string
           organization_code: string
           phone?: string | null
+          plan?: string
           status?: Database["public"]["Enums"]["entity_status"]
           timezone?: string
           updated_at?: string
+          valuation_method?: string
         }
         Update: {
           address?: string | null
+          allow_negative_stock?: boolean
           city?: string | null
           country?: string
           created_at?: string
           currency?: string
           description?: string | null
           email?: string | null
+          fiscal_year_start_month?: number
           id?: string
           is_demo?: boolean
           logo_url?: string | null
           name?: string
           organization_code?: string
           phone?: string | null
+          plan?: string
           status?: Database["public"]["Enums"]["entity_status"]
           timezone?: string
           updated_at?: string
+          valuation_method?: string
         }
         Relationships: []
       }
@@ -355,6 +893,144 @@ export type Database = {
           },
         ]
       }
+      purchase_order_items: {
+        Row: {
+          created_at: string
+          id: string
+          item_id: string
+          organization_id: string
+          purchase_order_id: string
+          quantity: number
+          received_quantity: number
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item_id: string
+          organization_id: string
+          purchase_order_id: string
+          quantity: number
+          received_quantity?: number
+          unit_price?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item_id?: string
+          organization_id?: string
+          purchase_order_id?: string
+          quantity?: number
+          received_quantity?: number
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "purchase_order_items_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "purchase_order_items_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "purchase_order_items_purchase_order_id_fkey"
+            columns: ["purchase_order_id"]
+            isOneToOne: false
+            referencedRelation: "purchase_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      purchase_orders: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          expected_date: string | null
+          id: string
+          notes: string | null
+          order_date: string
+          organization_id: string
+          po_number: string | null
+          rejection_reason: string | null
+          requested_by: string | null
+          status: Database["public"]["Enums"]["doc_status"]
+          supplier_id: string | null
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          expected_date?: string | null
+          id?: string
+          notes?: string | null
+          order_date?: string
+          organization_id: string
+          po_number?: string | null
+          rejection_reason?: string | null
+          requested_by?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          supplier_id?: string | null
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          expected_date?: string | null
+          id?: string
+          notes?: string | null
+          order_date?: string
+          organization_id?: string
+          po_number?: string | null
+          rejection_reason?: string | null
+          requested_by?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          supplier_id?: string | null
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "purchase_orders_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "purchase_orders_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "purchase_orders_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "purchase_orders_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reference_counters: {
         Row: {
           last_number: number
@@ -380,6 +1056,161 @@ export type Database = {
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      requisition_items: {
+        Row: {
+          approved_quantity: number | null
+          created_at: string
+          id: string
+          issued_quantity: number
+          item_id: string
+          organization_id: string
+          requested_quantity: number
+          requisition_id: string
+        }
+        Insert: {
+          approved_quantity?: number | null
+          created_at?: string
+          id?: string
+          issued_quantity?: number
+          item_id: string
+          organization_id: string
+          requested_quantity: number
+          requisition_id: string
+        }
+        Update: {
+          approved_quantity?: number | null
+          created_at?: string
+          id?: string
+          issued_quantity?: number
+          item_id?: string
+          organization_id?: string
+          requested_quantity?: number
+          requisition_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "requisition_items_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "requisition_items_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "requisition_items_requisition_id_fkey"
+            columns: ["requisition_id"]
+            isOneToOne: false
+            referencedRelation: "requisitions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      requisitions: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          department_id: string | null
+          destination_store_id: string | null
+          id: string
+          organization_id: string
+          priority: string
+          purpose: string | null
+          rejection_reason: string | null
+          requested_by: string | null
+          required_date: string | null
+          requisition_number: string | null
+          source_store_id: string | null
+          status: Database["public"]["Enums"]["doc_status"]
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          department_id?: string | null
+          destination_store_id?: string | null
+          id?: string
+          organization_id: string
+          priority?: string
+          purpose?: string | null
+          rejection_reason?: string | null
+          requested_by?: string | null
+          required_date?: string | null
+          requisition_number?: string | null
+          source_store_id?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          department_id?: string | null
+          destination_store_id?: string | null
+          id?: string
+          organization_id?: string
+          priority?: string
+          purpose?: string | null
+          rejection_reason?: string | null
+          requested_by?: string | null
+          required_date?: string | null
+          requisition_number?: string | null
+          source_store_id?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "requisitions_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "requisitions_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "requisitions_destination_store_id_fkey"
+            columns: ["destination_store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "requisitions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "requisitions_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "requisitions_source_store_id_fkey"
+            columns: ["source_store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
             referencedColumns: ["id"]
           },
         ]
@@ -453,6 +1284,99 @@ export type Database = {
           },
           {
             foreignKeyName: "stock_balances_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stock_incidents: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          attachment_path: string | null
+          created_at: string
+          description: string | null
+          id: string
+          incident_type: Database["public"]["Enums"]["incident_type"]
+          item_id: string
+          organization_id: string
+          quantity: number
+          reference: string | null
+          rejection_reason: string | null
+          reported_by: string | null
+          status: Database["public"]["Enums"]["doc_status"]
+          store_id: string
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          attachment_path?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          incident_type?: Database["public"]["Enums"]["incident_type"]
+          item_id: string
+          organization_id: string
+          quantity: number
+          reference?: string | null
+          rejection_reason?: string | null
+          reported_by?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          store_id: string
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          attachment_path?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          incident_type?: Database["public"]["Enums"]["incident_type"]
+          item_id?: string
+          organization_id?: string
+          quantity?: number
+          reference?: string | null
+          rejection_reason?: string | null
+          reported_by?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          store_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stock_incidents_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_incidents_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_incidents_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_incidents_reported_by_fkey"
+            columns: ["reported_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_incidents_store_id_fkey"
             columns: ["store_id"]
             isOneToOne: false
             referencedRelation: "stores"
@@ -586,6 +1510,361 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stock_returns: {
+        Row: {
+          condition: string | null
+          created_at: string
+          from_store_id: string | null
+          id: string
+          item_id: string
+          organization_id: string
+          posted_at: string | null
+          quantity: number
+          reason: string | null
+          return_number: string | null
+          returned_by: string | null
+          status: Database["public"]["Enums"]["doc_status"]
+          to_store_id: string
+          updated_at: string
+        }
+        Insert: {
+          condition?: string | null
+          created_at?: string
+          from_store_id?: string | null
+          id?: string
+          item_id: string
+          organization_id: string
+          posted_at?: string | null
+          quantity: number
+          reason?: string | null
+          return_number?: string | null
+          returned_by?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          to_store_id: string
+          updated_at?: string
+        }
+        Update: {
+          condition?: string | null
+          created_at?: string
+          from_store_id?: string | null
+          id?: string
+          item_id?: string
+          organization_id?: string
+          posted_at?: string | null
+          quantity?: number
+          reason?: string | null
+          return_number?: string | null
+          returned_by?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          to_store_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stock_returns_from_store_id_fkey"
+            columns: ["from_store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_returns_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_returns_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_returns_returned_by_fkey"
+            columns: ["returned_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_returns_to_store_id_fkey"
+            columns: ["to_store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stock_transfer_items: {
+        Row: {
+          created_at: string
+          dispatched_quantity: number
+          id: string
+          item_id: string
+          organization_id: string
+          received_quantity: number
+          requested_quantity: number
+          transfer_id: string
+        }
+        Insert: {
+          created_at?: string
+          dispatched_quantity?: number
+          id?: string
+          item_id: string
+          organization_id: string
+          received_quantity?: number
+          requested_quantity: number
+          transfer_id: string
+        }
+        Update: {
+          created_at?: string
+          dispatched_quantity?: number
+          id?: string
+          item_id?: string
+          organization_id?: string
+          received_quantity?: number
+          requested_quantity?: number
+          transfer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stock_transfer_items_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_transfer_items_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_transfer_items_transfer_id_fkey"
+            columns: ["transfer_id"]
+            isOneToOne: false
+            referencedRelation: "stock_transfers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stock_transfers: {
+        Row: {
+          approved_by: string | null
+          created_at: string
+          destination_store_id: string
+          dispatched_at: string | null
+          id: string
+          notes: string | null
+          organization_id: string
+          received_at: string | null
+          requested_by: string | null
+          source_store_id: string
+          status: Database["public"]["Enums"]["doc_status"]
+          transfer_number: string | null
+          updated_at: string
+        }
+        Insert: {
+          approved_by?: string | null
+          created_at?: string
+          destination_store_id: string
+          dispatched_at?: string | null
+          id?: string
+          notes?: string | null
+          organization_id: string
+          received_at?: string | null
+          requested_by?: string | null
+          source_store_id: string
+          status?: Database["public"]["Enums"]["doc_status"]
+          transfer_number?: string | null
+          updated_at?: string
+        }
+        Update: {
+          approved_by?: string | null
+          created_at?: string
+          destination_store_id?: string
+          dispatched_at?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          received_at?: string | null
+          requested_by?: string | null
+          source_store_id?: string
+          status?: Database["public"]["Enums"]["doc_status"]
+          transfer_number?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stock_transfers_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_transfers_destination_store_id_fkey"
+            columns: ["destination_store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_transfers_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_transfers_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_transfers_source_store_id_fkey"
+            columns: ["source_store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stocktake_items: {
+        Row: {
+          created_at: string
+          id: string
+          item_id: string
+          organization_id: string
+          physical_quantity: number | null
+          reason: string | null
+          stocktake_id: string
+          system_quantity: number
+          unit_cost: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item_id: string
+          organization_id: string
+          physical_quantity?: number | null
+          reason?: string | null
+          stocktake_id: string
+          system_quantity?: number
+          unit_cost?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item_id?: string
+          organization_id?: string
+          physical_quantity?: number | null
+          reason?: string | null
+          stocktake_id?: string
+          system_quantity?: number
+          unit_cost?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stocktake_items_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stocktake_items_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stocktake_items_stocktake_id_fkey"
+            columns: ["stocktake_id"]
+            isOneToOne: false
+            referencedRelation: "stocktakes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stocktakes: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          organization_id: string
+          reference: string | null
+          started_by: string | null
+          status: Database["public"]["Enums"]["doc_status"]
+          store_id: string
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          organization_id: string
+          reference?: string | null
+          started_by?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          store_id: string
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          reference?: string | null
+          started_by?: string | null
+          status?: Database["public"]["Enums"]["doc_status"]
+          store_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stocktakes_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stocktakes_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stocktakes_started_by_fkey"
+            columns: ["started_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stocktakes_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
             referencedColumns: ["id"]
           },
         ]
@@ -826,11 +2105,72 @@ export type Database = {
           },
         ]
       }
+      vehicles: {
+        Row: {
+          created_at: string
+          department_id: string | null
+          id: string
+          name: string | null
+          organization_id: string
+          registration_number: string
+          status: Database["public"]["Enums"]["entity_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          department_id?: string | null
+          id?: string
+          name?: string | null
+          organization_id: string
+          registration_number: string
+          status?: Database["public"]["Enums"]["entity_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          department_id?: string | null
+          id?: string
+          name?: string | null
+          organization_id?: string
+          registration_number?: string
+          status?: Database["public"]["Enums"]["entity_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vehicles_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vehicles_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      approve_purchase_order: {
+        Args: { _approve: boolean; _po: string; _reason?: string }
+        Returns: undefined
+      }
+      approve_requisition: {
+        Args: { _approve: boolean; _reason?: string; _req: string }
+        Returns: undefined
+      }
+      approve_stock_incident: {
+        Args: { _approve: boolean; _incident: string; _reason?: string }
+        Returns: undefined
+      }
+      approve_stocktake: { Args: { _stocktake: string }; Returns: undefined }
       claim_supreme_admin: { Args: never; Returns: boolean }
       create_organization: {
         Args: {
@@ -843,6 +2183,7 @@ export type Database = {
         Returns: string
       }
       current_org_id: { Args: never; Returns: string }
+      dispatch_transfer: { Args: { _transfer: string }; Returns: undefined }
       has_permission: { Args: { _permission: string }; Returns: boolean }
       has_role: {
         Args: {
@@ -853,6 +2194,7 @@ export type Database = {
       }
       in_org: { Args: { _org: string }; Returns: boolean }
       is_supreme_admin: { Args: never; Returns: boolean }
+      issue_requisition: { Args: { _req: string }; Returns: undefined }
       join_organization: {
         Args: { _code: string; _role?: Database["public"]["Enums"]["app_role"] }
         Returns: string
@@ -861,7 +2203,22 @@ export type Database = {
         Args: { _org: string; _prefix: string }
         Returns: string
       }
+      notify_permission: {
+        Args: {
+          _body: string
+          _category: string
+          _entity_id: string
+          _entity_type: string
+          _org: string
+          _permission: string
+          _title: string
+        }
+        Returns: undefined
+      }
       platform_stats: { Args: never; Returns: Json }
+      populate_stocktake: { Args: { _stocktake: string }; Returns: number }
+      post_goods_received_note: { Args: { _grn: string }; Returns: undefined }
+      post_stock_return: { Args: { _return: string }; Returns: undefined }
       post_stock_transaction: {
         Args: {
           _department?: string
@@ -877,9 +2234,14 @@ export type Database = {
         }
         Returns: string
       }
+      receive_transfer: { Args: { _transfer: string }; Returns: undefined }
       reverse_stock_transaction: {
         Args: { _reason: string; _transaction: string }
         Returns: string
+      }
+      submit_document: {
+        Args: { _id: string; _table: string }
+        Returns: undefined
       }
     }
     Enums: {
@@ -891,7 +2253,42 @@ export type Database = {
         | "department_head"
         | "finance"
         | "auditor"
+      asset_status:
+        | "ACTIVE"
+        | "IN_REPAIR"
+        | "DAMAGED"
+        | "LOST"
+        | "DISPOSED"
+        | "TRANSFERRED"
+      coupon_status:
+        | "AVAILABLE"
+        | "ISSUED"
+        | "REDEEMED"
+        | "CANCELLED"
+        | "EXPIRED"
+        | "LOST"
+      doc_status:
+        | "DRAFT"
+        | "SUBMITTED"
+        | "APPROVED"
+        | "PARTIALLY_APPROVED"
+        | "REJECTED"
+        | "PARTIALLY_RECEIVED"
+        | "RECEIVED"
+        | "PARTIALLY_ISSUED"
+        | "ISSUED"
+        | "IN_TRANSIT"
+        | "COMPLETED"
+        | "CANCELLED"
       entity_status: "active" | "inactive" | "suspended"
+      incident_type:
+        | "BREAKAGE"
+        | "DAMAGE"
+        | "EXPIRED"
+        | "SPOILT"
+        | "THEFT"
+        | "UNEXPLAINED_LOSS"
+        | "OTHER"
       stock_txn_type:
         | "RECEIPT"
         | "ISSUE"
@@ -1041,7 +2438,46 @@ export const Constants = {
         "finance",
         "auditor",
       ],
+      asset_status: [
+        "ACTIVE",
+        "IN_REPAIR",
+        "DAMAGED",
+        "LOST",
+        "DISPOSED",
+        "TRANSFERRED",
+      ],
+      coupon_status: [
+        "AVAILABLE",
+        "ISSUED",
+        "REDEEMED",
+        "CANCELLED",
+        "EXPIRED",
+        "LOST",
+      ],
+      doc_status: [
+        "DRAFT",
+        "SUBMITTED",
+        "APPROVED",
+        "PARTIALLY_APPROVED",
+        "REJECTED",
+        "PARTIALLY_RECEIVED",
+        "RECEIVED",
+        "PARTIALLY_ISSUED",
+        "ISSUED",
+        "IN_TRANSIT",
+        "COMPLETED",
+        "CANCELLED",
+      ],
       entity_status: ["active", "inactive", "suspended"],
+      incident_type: [
+        "BREAKAGE",
+        "DAMAGE",
+        "EXPIRED",
+        "SPOILT",
+        "THEFT",
+        "UNEXPLAINED_LOSS",
+        "OTHER",
+      ],
       stock_txn_type: [
         "RECEIPT",
         "ISSUE",
